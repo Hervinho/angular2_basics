@@ -41,7 +41,12 @@ import {SummaryPipe} from './summary.pipe';
                     <li *ngFor = "#myCourse of myCourses, #i = index">{{i+1}} - {{myCourse | uppercase}}</li>
                 </ul><br><br>
                 {{myPost.title}}<br>
-                {{myPost.body | summary: 15}}
+                {{myPost.body | summary: 15}}<br>
+                <ul>
+                    <li>Title: {{task.title}}</li>
+                    <li>Assignee: {{task.assignee != null ? task.assignee.name : "No Assignee"}}</li>
+                    <li>Assignee using Elvis Operator: {{task.assignee?.name}}</li>
+                </ul>
                 `,
                 pipes: [SummaryPipe],
     directives: [CoursesComponent, FavoriteComponent, LikeComponent, VoteComponent]
@@ -71,6 +76,11 @@ export class AppComponent {
     myPost = {
         title: 'POST',
         body: 'hjwhedhwheiwijeoewieuiwueiuwiu3eiu3wie4ihw. ieuiuoeoiwoieo2iwpoe2po3w-23wo2qp3wo2qio3woq23wo2i3wo2ueouoe2'
+    }
+
+    task = {
+        title: 'Unit Test',
+        assignee: null
     }
 
     tweet = {
