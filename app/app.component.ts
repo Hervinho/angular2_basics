@@ -4,6 +4,7 @@ import {FavoriteComponent} from './favorite.component';
 import {LikeComponent} from './like.component';
 import {VoteComponent} from './vote.component';
 import {SummaryPipe} from './summary.pipe';
+import {BootstrapPanel} from './bootstrap.panel.component';
 
 @Component({
     selector: 'my-app',
@@ -46,7 +47,11 @@ import {SummaryPipe} from './summary.pipe';
                     <li>Title: {{task.title}}</li>
                     <li>Assignee: {{task.assignee != null ? task.assignee.name : "No Assignee"}}</li>
                     <li>Assignee using Elvis Operator: {{task.assignee?.name}}</li>
-                </ul>
+                </ul><br><br>
+                <bs-panel>
+                    <div class="heading">Heading here</div>
+                    <div class="body">Body here</div>
+                </bs-panel>
                 `,
                 pipes: [SummaryPipe],
     directives: [CoursesComponent, FavoriteComponent, LikeComponent, VoteComponent]
