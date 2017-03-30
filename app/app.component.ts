@@ -11,7 +11,9 @@ import {VoteComponent} from './vote.component';
     //class binding. <button class="btn btn-primary" [class.active] = "isActive">Hi!</button>
     //style binding. If button is active, color is blue, else yellow
     //event binding. Use () when calling a method.
-    template: ` <input type="text" [value] ="title" (input) = "title = $event.target.value"/><br>
+    template: ` <div [hidden]="courses.length == 0">List of Courses</div>
+                <div [hidden]="courses.length > 0">No Courses</div>
+                <input type="text" [value] ="title" (input) = "title = $event.target.value"/><br>
                 <input type="button" (click)="title = ''" value="CLEAR"/>
                 <input type="text" bindon-ngModel = "title"/>
                 Preview: {{title}}
@@ -25,10 +27,20 @@ import {VoteComponent} from './vote.component';
                 <br><favorite [is-favorite] = "post.isFavorite" (change) = "onFavoriteChange($event)"></favorite>
                 <br><like [totalLikes] = "tweet.totalLikes" [iLike] = "tweet.iLike"></like>
                 <br><vote [voteCount] = "voter.voteCount" [myVote] = "voter.myVote" (vote) = "onVote($event)"></vote>
+                <ul class="nav nav-pills">
+                    <li><a (click) = "viewMode = 'map'">View Map</a></li>
+                    <li><a (click) = "viewMode = 'list'">List View</a></li>
+                </ul>
+                <div [ngSwitch] = "viewMode">
+                    <template [ngSwitchWhen]="'map'" ngSwitchDefault>Map Content</template>
+                    <template [ngSwitchWhen]="'list'">List Content</template>
+                </div>
                 `,
     directives: [CoursesComponent, FavoriteComponent, LikeComponent, VoteComponent]
 })
 export class AppComponent {
+    viewMode = 'map';
+    courses = [];
     title = "My Angular App";
     imgUrl = "http://lorempixel.com/400/200/";
     isActive = false;
