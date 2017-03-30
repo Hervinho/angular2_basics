@@ -35,12 +35,16 @@ import {VoteComponent} from './vote.component';
                     <template [ngSwitchWhen]="'map'" ngSwitchDefault>Map Content</template>
                     <template [ngSwitchWhen]="'list'">List Content</template>
                 </div>
+                <ul>
+                    <li *ngFor = "#myCourse of myCourses, #i = index">{{i+1}} - {{myCourse}}</li>
+                </ul>
                 `,
     directives: [CoursesComponent, FavoriteComponent, LikeComponent, VoteComponent]
 })
 export class AppComponent {
     viewMode = 'map';
     courses = [];
+    myCourses = ['NodeJS', 'TypeScript', 'AngularJS'];
     title = "My Angular App";
     imgUrl = "http://lorempixel.com/400/200/";
     isActive = false;
