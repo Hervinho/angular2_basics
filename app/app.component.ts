@@ -3,6 +3,7 @@ import {CoursesComponent} from './courses.component';
 import {FavoriteComponent} from './favorite.component';
 import {LikeComponent} from './like.component';
 import {VoteComponent} from './vote.component';
+import {SummaryPipe} from './summary.pipe';
 
 @Component({
     selector: 'my-app',
@@ -11,6 +12,7 @@ import {VoteComponent} from './vote.component';
     //class binding. <button class="btn btn-primary" [class.active] = "isActive">Hi!</button>
     //style binding. If button is active, color is blue, else yellow
     //event binding. Use () when calling a method.
+    //summary is a custom pipe.
     template: ` <div [hidden]="courses.length == 0">List of Courses</div>
                 <div [hidden]="courses.length > 0">No Courses</div>
                 <input type="text" [value] ="title" (input) = "title = $event.target.value"/><br>
@@ -36,9 +38,12 @@ import {VoteComponent} from './vote.component';
                     <template [ngSwitchWhen]="'list'">List Content</template>
                 </div>
                 <ul>
-                    <li *ngFor = "#myCourse of myCourses, #i = index">{{i+1}} - {{myCourse}}</li>
-                </ul>
+                    <li *ngFor = "#myCourse of myCourses, #i = index">{{i+1}} - {{myCourse | uppercase}}</li>
+                </ul><br><br>
+                {{myPost.title}}<br>
+                {{myPost.body | summary: 15}}
                 `,
+                pipes: [SummaryPipe],
     directives: [CoursesComponent, FavoriteComponent, LikeComponent, VoteComponent]
 })
 export class AppComponent {
@@ -61,6 +66,11 @@ export class AppComponent {
 
     post = {
         isFavorite: true
+    }
+
+    myPost = {
+        title: 'POST',
+        body: 'hjwhedhwheiwijeoewieuiwueiuwiu3eiu3wie4ihw. ieuiuoeoiwoieo2iwpoe2po3w-23wo2qp3wo2qio3woq23wo2i3wo2ueouoe2'
     }
 
     tweet = {

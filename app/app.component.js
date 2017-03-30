@@ -1,4 +1,4 @@
-System.register(['angular2/core', './courses.component', './favorite.component', './like.component', './vote.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './courses.component', './favorite.component', './like.component', './vote.component', './summary.pipe'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './courses.component', './favorite.component',
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, courses_component_1, favorite_component_1, like_component_1, vote_component_1;
+    var core_1, courses_component_1, favorite_component_1, like_component_1, vote_component_1, summary_pipe_1;
     var AppComponent;
     return {
         setters:[
@@ -28,6 +28,9 @@ System.register(['angular2/core', './courses.component', './favorite.component',
             },
             function (vote_component_1_1) {
                 vote_component_1 = vote_component_1_1;
+            },
+            function (summary_pipe_1_1) {
+                summary_pipe_1 = summary_pipe_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -40,6 +43,10 @@ System.register(['angular2/core', './courses.component', './favorite.component',
                     this.isActive = false;
                     this.post = {
                         isFavorite: true
+                    };
+                    this.myPost = {
+                        title: 'POST',
+                        body: 'hjwhedhwheiwijeoewieuiwueiuwiu3eiu3wie4ihw. ieuiuoeoiwoieo2iwpoe2po3w-23wo2qp3wo2qio3woq23wo2i3wo2ueouoe2'
                     };
                     this.tweet = {
                         totalLikes: 5,
@@ -72,7 +79,9 @@ System.register(['angular2/core', './courses.component', './favorite.component',
                         //class binding. <button class="btn btn-primary" [class.active] = "isActive">Hi!</button>
                         //style binding. If button is active, color is blue, else yellow
                         //event binding. Use () when calling a method.
-                        template: " <div [hidden]=\"courses.length == 0\">List of Courses</div>\n                <div [hidden]=\"courses.length > 0\">No Courses</div>\n                <input type=\"text\" [value] =\"title\" (input) = \"title = $event.target.value\"/><br>\n                <input type=\"button\" (click)=\"title = ''\" value=\"CLEAR\"/>\n                <input type=\"text\" bindon-ngModel = \"title\"/>\n                Preview: {{title}}\n                <br><button class=\"btn btn-primary\" [class.active] = \"isActive\">Hi!</button>\n                <br><button class=\"btn btn-primary\" [style.backgroundColor] = \"isActive ? 'blue' : 'yellow'\">Sup!</button>\n                <br><div (click) = \"onDivClick()\">\n                    <button (click)=\"onClick($event)\">Event</button>\n                </div>\n                <br><h1>{{title}}</h1><img src=\"{{imgUrl}}\" />\n                <br><i class=\"glyphicon glyphicon-star\"></i>\n                <br><favorite [is-favorite] = \"post.isFavorite\" (change) = \"onFavoriteChange($event)\"></favorite>\n                <br><like [totalLikes] = \"tweet.totalLikes\" [iLike] = \"tweet.iLike\"></like>\n                <br><vote [voteCount] = \"voter.voteCount\" [myVote] = \"voter.myVote\" (vote) = \"onVote($event)\"></vote>\n                <ul class=\"nav nav-pills\">\n                    <li><a (click) = \"viewMode = 'map'\">View Map</a></li>\n                    <li><a (click) = \"viewMode = 'list'\">List View</a></li>\n                </ul>\n                <div [ngSwitch] = \"viewMode\">\n                    <template [ngSwitchWhen]=\"'map'\" ngSwitchDefault>Map Content</template>\n                    <template [ngSwitchWhen]=\"'list'\">List Content</template>\n                </div>\n                <ul>\n                    <li *ngFor = \"#myCourse of myCourses, #i = index\">{{i+1}} - {{myCourse}}</li>\n                </ul>\n                ",
+                        //summary is a custom pipe.
+                        template: " <div [hidden]=\"courses.length == 0\">List of Courses</div>\n                <div [hidden]=\"courses.length > 0\">No Courses</div>\n                <input type=\"text\" [value] =\"title\" (input) = \"title = $event.target.value\"/><br>\n                <input type=\"button\" (click)=\"title = ''\" value=\"CLEAR\"/>\n                <input type=\"text\" bindon-ngModel = \"title\"/>\n                Preview: {{title}}\n                <br><button class=\"btn btn-primary\" [class.active] = \"isActive\">Hi!</button>\n                <br><button class=\"btn btn-primary\" [style.backgroundColor] = \"isActive ? 'blue' : 'yellow'\">Sup!</button>\n                <br><div (click) = \"onDivClick()\">\n                    <button (click)=\"onClick($event)\">Event</button>\n                </div>\n                <br><h1>{{title}}</h1><img src=\"{{imgUrl}}\" />\n                <br><i class=\"glyphicon glyphicon-star\"></i>\n                <br><favorite [is-favorite] = \"post.isFavorite\" (change) = \"onFavoriteChange($event)\"></favorite>\n                <br><like [totalLikes] = \"tweet.totalLikes\" [iLike] = \"tweet.iLike\"></like>\n                <br><vote [voteCount] = \"voter.voteCount\" [myVote] = \"voter.myVote\" (vote) = \"onVote($event)\"></vote>\n                <ul class=\"nav nav-pills\">\n                    <li><a (click) = \"viewMode = 'map'\">View Map</a></li>\n                    <li><a (click) = \"viewMode = 'list'\">List View</a></li>\n                </ul>\n                <div [ngSwitch] = \"viewMode\">\n                    <template [ngSwitchWhen]=\"'map'\" ngSwitchDefault>Map Content</template>\n                    <template [ngSwitchWhen]=\"'list'\">List Content</template>\n                </div>\n                <ul>\n                    <li *ngFor = \"#myCourse of myCourses, #i = index\">{{i+1}} - {{myCourse | uppercase}}</li>\n                </ul><br><br>\n                {{myPost.title}}<br>\n                {{myPost.body | summary: 15}}\n                ",
+                        pipes: [summary_pipe_1.SummaryPipe],
                         directives: [courses_component_1.CoursesComponent, favorite_component_1.FavoriteComponent, like_component_1.LikeComponent, vote_component_1.VoteComponent]
                     }), 
                     __metadata('design:paramtypes', [])
