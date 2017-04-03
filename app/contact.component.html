@@ -1,4 +1,4 @@
-<form>
+<form #frm="ngForm" (ngSubmit)="onSubmit(frm.form)">
     <div class="form-goup">
         <label for="firstName"></label>
         <input #firstName="ngForm" ngControl="firstName" id="firstName" 
@@ -16,5 +16,5 @@
         <textarea #comment="ngForm" ngControl="comment" id="comment" cols="30" rows="10" required></textarea>
         <div class="alert alert-danger" *ngIf="!comment.valid && comment.touched">Comment required.</div>
     </div>
-    <button class="btn btn-primary" type="submit">SUBMIT</button>
+    <button class="btn btn-primary" type="submit" [disabled]="!frm.valid">SUBMIT</button>
 </form>

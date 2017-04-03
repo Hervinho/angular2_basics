@@ -8,4 +8,7 @@ export class ContactFormComponent{
     log(x){
         console.log(x);
     }
+    onSubmit(form){
+        console.log('Form: ', form);
+    }
 }
