@@ -5,6 +5,7 @@ import {LikeComponent} from './like.component';
 import {VoteComponent} from './vote.component';
 import {SummaryPipe} from './summary.pipe';
 import {BootstrapPanel} from './bootstrap.panel.component';
+import {ContactFormComponent} from './contact.component';
 
 @Component({
     selector: 'my-app',
@@ -51,10 +52,11 @@ import {BootstrapPanel} from './bootstrap.panel.component';
                 <bs-panel>
                     <div class="heading">Heading here</div>
                     <div class="body">Body here</div>
-                </bs-panel>
+                </bs-panel><br>
+                <contact-form></contact-form>
                 `,
                 pipes: [SummaryPipe],
-    directives: [CoursesComponent, FavoriteComponent, LikeComponent, VoteComponent]
+    directives: [CoursesComponent, FavoriteComponent, LikeComponent, VoteComponent, ContactFormComponent]
 })
 export class AppComponent {
     viewMode = 'map';
